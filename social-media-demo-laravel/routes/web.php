@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -11,6 +12,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    // API routes
+    Route::get('api/posts', [PostController::class, 'getPosts'])->name('get-all-user-posts');
+    Route::post('api/posts', [PostController::class,'store'])->name('make-post');
 });
 
 require __DIR__.'/settings.php';
